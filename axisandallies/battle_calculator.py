@@ -96,7 +96,7 @@ def battle(attackers, defenders):
     return 0
 
 
-def battle_sim(attackers, defenders, num_sims=10000):
+def battle_sim(attackers, defenders, num_sims=1000):
     """
     runs full simulations and prints final results as
     win percent, loss percent, draw percent
@@ -116,12 +116,4 @@ def battle_sim(attackers, defenders, num_sims=10000):
             draws += 1
         elif res == 1:
             wins += 1
-    print(f'wins: {wins / num_sims}')
-    print(f'losses: {losses / num_sims}')
-    print(f'draws: {draws / num_sims}')
-
-if __name__ == '__main__':
-#    battle_sim(attackers=Squad([Infantry(), Infantry(), Infantry(), Artillery(), Artillery(), Tank(), TacticalBomber(), Fighter(), Fighter(), Fighter()]),
-#              defenders=Squad([Infantry(), Infantry(), Infantry(), Artillery(), Artillery(), Tank(), TacticalBomber(), Fighter(), Fighter(), Fighter()]))
-
-    battle_sim(attackers=Squad([Fighter(), Fighter()]), defenders=Squad([AAA()]))
+    return {'win': wins/num_sims, 'loss': losses/num_sims, 'draw': draws/num_sims}

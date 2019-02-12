@@ -2,29 +2,187 @@
 <html lang="en">
 <head>
     <title>Axis and Allies Battle Calculator</title>
+    <link rel="stylesheet"
+          href="../static/style.css"/>
+    <style>
+        table, th, td {
+  border: 1px solid black;
+}
+    </style>
 </head>
 <body>
 <p>Monte Carlo calculator for determining the chances of winning an attack in Axis and Allies. Note: does not
 care about the relationship between submarines and planes, but might one day.</p>
 </body>
 
-<ul>
-    <li>
-        <label>Label 1</label>
-        <input type="text" />
-    </li>
-     <li>
-        <label>Label 2</label>
-        <input type="text" />
-    </li>
-     <li>
-        <label>Label 3</label>
-        <input type="text" />
-    </li>
-     <li>
-        <label>Label 4</label>
-        <input type="text" />
-    </li>
-</ul>
+<form method="GET" action="{{ request.route_path('aaa_battle_calculator') }}">
+    <table style="width:100%">
+      <tr>
+        <th>Unit</th>
+        <th>Attackers</th>
+        <th>Defenders</th>
+      </tr>
+
+      <tr>
+        <td>Infantry</td>
+        <td>
+            <input type="text" name="a_inf" title="a_inf" value={% if a_inf is defined %}{{ a_inf }}{% else %}"0"{% endif %} />
+        </td>
+        <td>
+            <input type="text" name="d_inf" title="d_inf" value={% if d_inf is defined %}{{ a_inf }}{% else %}"0"{% endif %} />
+        </td>
+      </tr>
+
+      <tr>
+        <td>Artillery</td>
+        <td>
+            <input type="text" name="a_art" title="a_art" value={% if a_art is defined %}{{ a_art }}{% else %}"0"{% endif %} />
+        </td>
+        <td>
+            <input type="text" name="d_art" title="d_art" value={% if d_art is defined %}{{ d_art }}{% else %}"0"{% endif %} />
+        </td>
+      </tr>
+
+      <tr>
+        <td>Mech</td>
+        <td>
+            <input type="text" name="a_mech" title="a_mech" value={% if a_mech is defined %}{{ a_mech }}{% else %}"0"{% endif %} />
+        </td>
+        <td>
+            <input type="text" name="d_mech" title="d_mech" value={% if d_mech is defined %}{{ d_mech }}{% else %}"0"{% endif %} />
+        </td>
+      </tr>
+
+      <tr>
+        <td>Tank</td>
+        <td>
+            <input type="text" name="a_tank" title="a_tank" value={% if a_tank is defined %}{{ a_tank }}{% else %}"0"{% endif %} />
+        </td>
+        <td>
+            <input type="text" name="d_tank" title="d_tank" value={% if d_tank is defined %}{{ d_tank }}{% else %}"0"{% endif %} />
+        </td>
+      </tr>
+
+      <tr>
+        <td>AAA</td>
+        <td>
+            XXX
+        </td>
+        <td>
+            <input type="text" name="d_aaa" title="d_aaa" value={% if d_aaa is defined %}{{ d_aaa }}{% else %}"0"{% endif %} />
+        </td>
+      </tr>
+
+      <tr>
+        <td>Fighters</td>
+        <td>
+            <input type="text" name="a_f" title="a_f" value={% if a_f is defined %}{{ a_f }}{% else %}"0"{% endif %} />
+        </td>
+        <td>
+            <input type="text" name="d_f" title="d_f" value={% if d_f is defined %}{{ d_f }}{% else %}"0"{% endif %} />
+        </td>
+      </tr>
+
+      <tr>
+        <td>Tactical Bombers</td>
+        <td>
+            <input type="text" name="a_tb" title="a_tb" value={% if a_tb is defined %}{{ a_tb }}{% else %}"0"{% endif %} />
+        </td>
+        <td>
+            <input type="text" name="d_tb" title="d_tb" value={% if d_tb is defined %}{{ d_tb }}{% else %}"0"{% endif %} />
+        </td>
+      </tr>
+
+      <tr>
+        <td>Strategic Bombers</td>
+        <td>
+            <input type="text" name="a_sb" title="a_sb" value={% if a_sb is defined %}{{ a_sb }}{% else %}"0"{% endif %} />
+        </td>
+        <td>
+            <input type="text" name="d_sb" title="d_sb" value={% if d_sb is defined %}{{ d_sb }}{% else %}"0"{% endif %} />
+        </td>
+      </tr>
+
+      <tr>
+        <td>Battleships</td>
+        <td>
+            <input type="text" name="a_bs" title="a_bs" value={% if a_bs is defined %}{{ a_bs }}{% else %}"0"{% endif %} />
+        </td>
+        <td>
+            <input type="text" name="d_bs" title="d_bs" value={% if d_bs is defined %}{{ d_bs }}{% else %}"0"{% endif %} />
+        </td>
+      </tr>
+
+      <tr>
+        <td>Aircraft Carriers</td>
+        <td>
+            <input type="text" name="a_ac" title="a_ac" value={% if a_ac is defined %}{{ a_ac }}{% else %}"0"{% endif %} />
+        </td>
+        <td>
+            <input type="text" name="d_ac" title="d_ac" value={% if d_ac is defined %}{{ d_ac }}{% else %}"0"{% endif %} />
+        </td>
+      </tr>
+
+      <tr>
+        <td>Cruisers</td>
+        <td>
+            <input type="text" name="a_c" title="a_c" value={% if a_c is defined %}{{ a_c }}{% else %}"0"{% endif %} />
+        </td>
+        <td>
+            <input type="text" name="d_c" title="d_c" value={% if d_c is defined %}{{ d_c }}{% else %}"0"{% endif %} />
+        </td>
+      </tr>
+
+      <tr>
+        <td>Destroyers</td>
+        <td>
+            <input type="text" name="a_d" title="a_d" value={% if a_d is defined %}{{ a_d }}{% else %}"0"{% endif %} />
+        </td>
+        <td>
+            <input type="text" name="d_d" title="d_d" value={% if d_d is defined %}{{ d_d }}{% else %}"0"{% endif %} />
+        </td>
+      </tr>
+
+      <tr>
+        <td>Submarines</td>
+        <td>
+            <input type="text" name="a_sub" title="a_sub" value={% if a_sub is defined %}{{ a_sub }}{% else %}"0"{% endif %} />
+        </td>
+        <td>
+            <input type="text" name="d_sub" title="d_sub" value={% if d_sub is defined %}{{ d_sub }}{% else %}"0"{% endif %} />
+        </td>
+      </tr>
+
+      <tr>
+        <td>Transports</td>
+        <td>
+            <input type="text" name="a_t" title="a_t" value={% if a_t is defined %}{{ a_t }}{% else %}"0"{% endif %} />
+        </td>
+        <td>
+            <input type="text" name="d_t" title="d_t" value={% if d_t is defined %}{{ d_t }}{% else %}"0"{% endif %} />
+        </td>
+      </tr>
+
+    </table>
+<br>
+Number of simulations: <input name="num_sims" title="num_sims" value={% if num_sims is defined %}{{ num_sims }}{% else %}"1000"{% endif %} />
+<br>
+<input type="submit" value="Simulate" >
+</form>
+
+<br>
+RESULTS
+<br>
+{% if win is defined %}
+win percent: {{ win * 100 }}%
+{% endif %}
+{% if loss is defined %}
+<br>
+loss percent: {{ loss * 100 }}%
+{% endif %}
+{% if draw is defined %}
+<br>
+win percent: {{ draw * 100 }}%
+{% endif %}
 
 </html>
