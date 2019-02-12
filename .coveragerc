@@ -1,0 +1,3 @@
+[run]
+source = axisandallies
+omit = axisandallies/test*
