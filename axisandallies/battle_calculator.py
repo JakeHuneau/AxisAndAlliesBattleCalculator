@@ -4,7 +4,7 @@ of you winning a battle.
 """
 from copy import deepcopy
 
-from units import *
+from axisandallies.units import *
 
 
 def surprises(attackers, defenders):
