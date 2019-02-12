@@ -4,8 +4,6 @@ of you winning a battle.
 """
 from copy import deepcopy
 
-from tqdm import tqdm
-
 from units import *
 
 
@@ -108,7 +106,7 @@ def battle_sim(attackers, defenders, num_sims=10000):
     losses = 0
     attackers_units = attackers.units
     defenders_units = defenders.units
-    for _ in tqdm(range(num_sims)):
+    for _ in range(num_sims):
         attackers = Squad(deepcopy(attackers_units))
         defenders = Squad(deepcopy(defenders_units))
         res = battle(attackers, defenders)
