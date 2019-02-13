@@ -10,10 +10,7 @@ AxisAndAllies.egg-info/not-zip-safe
 AxisAndAllies.egg-info/requires.txt
 AxisAndAllies.egg-info/top_level.txt
 axisandallies/__init__.py
-axisandallies/tests.py
+axisandallies/battle_calculator.py
+axisandallies/units.py
 axisandallies/views.py
-axisandallies/static/pyramid-16x16.png
-axisandallies/static/pyramid.png
-axisandallies/static/theme.css
-axisandallies/templates/layout.jinja2
-axisandallies/templates/mytemplate.jinja2
+axisandallies/templates/aaa.jinja2
