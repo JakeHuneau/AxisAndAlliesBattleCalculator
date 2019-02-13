@@ -58,8 +58,6 @@ def surprises(attackers, defenders):
                 break
 
 
-
-
 def battle_turn(attackers, defenders):
     """
     A single fight in a battle.
@@ -75,6 +73,17 @@ def battle_turn(attackers, defenders):
     defenders.remove_casualties(hits=attackers_hits, attacking=False)
 
 
+def endable_fight(attackers, defenders):
+    """Ensure a fight can actually end"""
+    for unit in attackers.units:
+        if unit.attack:
+            return True
+    for unit in defenders.units:
+        if unit.defense:
+            return True
+    return False
+
+
 def battle(attackers, defenders):
     """
     An entire battle. Go back and forth attacking until one
@@ -86,9 +95,11 @@ def battle(attackers, defenders):
     """
     surprises(attackers, defenders)
 
-    while attackers.total_alive and defenders.total_alive:
+    while attackers.total_alive and defenders.total_alive and endable_fight(attackers, defenders):
         battle_turn(attackers, defenders)
 
+    if attackers.total_alive and defenders.total_alive:  # Non-combat units left
+        return 0
     if attackers.total_alive:
         return 1
     if defenders.total_alive:
