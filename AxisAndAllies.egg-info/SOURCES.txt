@@ -2,6 +2,7 @@ CHANGES.txt
 MANIFEST.in
 README.txt
 production.ini
+setup.py
 AxisAndAllies.egg-info/PKG-INFO
 AxisAndAllies.egg-info/SOURCES.txt
 AxisAndAllies.egg-info/dependency_links.txt

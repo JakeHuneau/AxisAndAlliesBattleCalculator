@@ -2,6 +2,7 @@
 Monte Carlo simulation for predicting the probability
 of you winning a battle.
 """
+from collections import defaultdict
 from copy import deepcopy
 
 from axisandallies.units import *
@@ -90,21 +91,14 @@ def battle(attackers, defenders):
     Squad is empty.
 
     Returns:
-        (int) 1 if attackers win, -1 if defenders win,
-              0 if draw (Everyone died)
+        (int) Number of survivors. + means attackers remain, - means defenders remain
     """
     surprises(attackers, defenders)
 
     while attackers.total_alive and defenders.total_alive and endable_fight(attackers, defenders):
         battle_turn(attackers, defenders)
 
-    if attackers.total_alive and defenders.total_alive:  # Non-combat units left
-        return 0
-    if attackers.total_alive:
-        return 1
-    if defenders.total_alive:
-        return -1
-    return 0
+    return attackers.total_alive - defenders.total_alive
 
 
 def battle_sim(attackers, defenders, num_sims=1000):
@@ -115,16 +109,22 @@ def battle_sim(attackers, defenders, num_sims=1000):
     wins = 0
     draws = 0
     losses = 0
+    survivors = defaultdict(int)
     attackers_units = attackers.units
     defenders_units = defenders.units
     for _ in range(num_sims):
         attackers = Squad(deepcopy(attackers_units))
         defenders = Squad(deepcopy(defenders_units))
         res = battle(attackers, defenders)
-        if res == -1:
+        survivors[res] += 1
+        if res < 0:
             losses += 1
         elif res == 0:
             draws += 1
-        elif res == 1:
+        elif res > 0:
             wins += 1
-    return {'win': wins/num_sims, 'loss': losses/num_sims, 'draw': draws/num_sims}
+
+    return {'win': wins/num_sims,
+            'loss': losses/num_sims,
+            'draw': draws/num_sims,
+            'survivors': sorted((k, v/num_sims) for k, v in survivors.items())}

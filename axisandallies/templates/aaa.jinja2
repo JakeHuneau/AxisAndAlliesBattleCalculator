@@ -6,183 +6,207 @@
           href="../static/style.css"/>
     <style>
         table, th, td {
-  border: 1px solid black;
-}
+            border: 1px solid black;
+        }
     </style>
 </head>
 <body>
-<p>Monte Carlo calculator for determining the chances of winning an attack in Axis and Allies. Note: does not
-care about the relationship between submarines and planes, but might one day.</p>
+<p>Monte Carlo calculator for determining the chances of winning an attack in Axis and Allies.
+    <br>Note: does not care about the relationship between submarines and planes, but might one day.</p>
 </body>
 
 <form method="GET" action="{{ request.route_path('aaa_battle_calculator') }}">
-    <table style="width:100%">
-      <tr>
-        <th>Unit</th>
-        <th>Attackers</th>
-        <th>Defenders</th>
-      </tr>
+    <table style="width:30%">
+        <tr>
+            <th>Unit</th>
+            <th>Attackers</th>
+            <th>Defenders</th>
+        </tr>
 
-      <tr>
-        <td>Infantry</td>
-        <td>
-            <input type="text" name="a_inf" title="a_inf" value={% if a_inf is defined %}{{ a_inf }}{% else %}"0"{% endif %} />
-        </td>
-        <td>
-            <input type="text" name="d_inf" title="d_inf" value={% if d_inf is defined %}{{ d_inf }}{% else %}"0"{% endif %} />
-        </td>
-      </tr>
+        <tr>
+            <td>Infantry</td>
+            <td>
+                <input type="text" name="a_inf" title="a_inf" {% if a_inf != 0 %}value="{{ a_inf }}"{% else %} placeholder="0"{% endif %}/>
+            </td>
+            <td>
+                <input type="text" name="d_inf" title="d_inf" {% if d_inf != 0 %}value="{{ d_inf }}"{% else %} placeholder="0"{% endif %}/>
+            </td>
+        </tr>
 
-      <tr>
-        <td>Artillery</td>
-        <td>
-            <input type="text" name="a_art" title="a_art" value={% if a_art is defined %}{{ a_art }}{% else %}"0"{% endif %} />
-        </td>
-        <td>
-            <input type="text" name="d_art" title="d_art" value={% if d_art is defined %}{{ d_art }}{% else %}"0"{% endif %} />
-        </td>
-      </tr>
+        <tr>
+            <td>Artillery</td>
+            <td>
+                <input type="text" name="a_art" title="a_art" {% if a_art != 0 %}value="{{ a_art }}"{% else %} placeholder="0"{% endif %}/>
+            </td>
+            <td>
+                <input type="text" name="d_art" title="d_art" {% if d_art != 0 %}value="{{ d_art }}"{% else %} placeholder="0"{% endif %}/>
+            </td>
+        </tr>
 
-      <tr>
-        <td>Mech</td>
-        <td>
-            <input type="text" name="a_mech" title="a_mech" value={% if a_mech is defined %}{{ a_mech }}{% else %}"0"{% endif %} />
-        </td>
-        <td>
-            <input type="text" name="d_mech" title="d_mech" value={% if d_mech is defined %}{{ d_mech }}{% else %}"0"{% endif %} />
-        </td>
-      </tr>
+        <tr>
+            <td>Mech</td>
+            <td>
+                <input type="text" name="a_mech" title="a_mech" {% if a_mech != 0 %}value="{{ a_mech }}"{% else %} placeholder="0"{% endif %}/>
+            </td>
+            <td>
+                <input type="text" name="d_mech" title="d_mech" {% if d_mech != 0 %}value="{{ d_mech }}"{% else %} placeholder="0"{% endif %}/>
+            </td>
+        </tr>
 
-      <tr>
-        <td>Tank</td>
-        <td>
-            <input type="text" name="a_tank" title="a_tank" value={% if a_tank is defined %}{{ a_tank }}{% else %}"0"{% endif %} />
-        </td>
-        <td>
-            <input type="text" name="d_tank" title="d_tank" value={% if d_tank is defined %}{{ d_tank }}{% else %}"0"{% endif %} />
-        </td>
-      </tr>
+        <tr>
+            <td>Tank</td>
+            <td>
+                <input type="text" name="a_tank" title="a_tank" {% if a_tank != 0 %}value="{{ a_tank }}"{% else %} placeholder="0"{% endif %}/>
+            </td>
+            <td>
+                <input type="text" name="d_tank" title="d_tank" {% if d_tank != 0 %}value="{{ d_tank }}"{% else %} placeholder="0"{% endif %}/>
+            </td>
+        </tr>
 
-      <tr>
-        <td>AAA</td>
-        <td>
-            XXX
-        </td>
-        <td>
-            <input type="text" name="d_aaa" title="d_aaa" value={% if d_aaa is defined %}{{ d_aaa }}{% else %}"0"{% endif %} />
-        </td>
-      </tr>
+        <tr>
+            <td>AAA</td>
+            <td>
+                XXX
+            </td>
+            <td>
+                <input type="text" name="d_aaa" title="d_aaa" {% if d_aaa != 0 %}value="{{ d_aaa }}"{% else %} placeholder="0"{% endif %}/>
+            </td>
+        </tr>
 
-      <tr>
-        <td>Fighters</td>
-        <td>
-            <input type="text" name="a_f" title="a_f" value={% if a_f is defined %}{{ a_f }}{% else %}"0"{% endif %} />
-        </td>
-        <td>
-            <input type="text" name="d_f" title="d_f" value={% if d_f is defined %}{{ d_f }}{% else %}"0"{% endif %} />
-        </td>
-      </tr>
+        <tr>
+            <td>Fighters</td>
+            <td>
+                <input type="text" name="a_f" title="a_f" {% if a_f != 0 %}value="{{ a_f }}"{% else %} placeholder="0"{% endif %}/>
+            </td>
+            <td>
+                <input type="text" name="d_f" title="d_f" {% if d_f != 0 %}value="{{ d_f }}"{% else %} placeholder="0"{% endif %}/>
+            </td>
+        </tr>
 
-      <tr>
-        <td>Tactical Bombers</td>
-        <td>
-            <input type="text" name="a_tb" title="a_tb" value={% if a_tb is defined %}{{ a_tb }}{% else %}"0"{% endif %} />
-        </td>
-        <td>
-            <input type="text" name="d_tb" title="d_tb" value={% if d_tb is defined %}{{ d_tb }}{% else %}"0"{% endif %} />
-        </td>
-      </tr>
+        <tr>
+            <td>Tactical Bombers</td>
+            <td>
+                <input type="text" name="a_tb" title="a_tb" {% if a_tb != 0 %}value="{{ a_tb }}"{% else %} placeholder="0"{% endif %}/>
+            </td>
+            <td>
+                <input type="text" name="d_tb" title="d_tb" {% if d_tb != 0 %}value="{{ d_tb }}"{% else %} placeholder="0"{% endif %}/>
+            </td>
+        </tr>
 
-      <tr>
-        <td>Strategic Bombers</td>
-        <td>
-            <input type="text" name="a_sb" title="a_sb" value={% if a_sb is defined %}{{ a_sb }}{% else %}"0"{% endif %} />
-        </td>
-        <td>
-            <input type="text" name="d_sb" title="d_sb" value={% if d_sb is defined %}{{ d_sb }}{% else %}"0"{% endif %} />
-        </td>
-      </tr>
+        <tr>
+            <td>Strategic Bombers</td>
+            <td>
+                <input type="text" name="a_sb" title="a_sb" {% if a_sb != 0 %}value="{{ a_sb }}"{% else %} placeholder="0"{% endif %}/>
+            </td>
+            <td>
+                <input type="text" name="d_sb" title="d_sb" {% if d_sb != 0 %}value="{{ d_sb }}"{% else %} placeholder="0"{% endif %}/>
+            </td>
+        </tr>
 
-      <tr>
-        <td>Battleships</td>
-        <td>
-            <input type="text" name="a_bs" title="a_bs" value={% if a_bs is defined %}{{ a_bs }}{% else %}"0"{% endif %} />
-        </td>
-        <td>
-            <input type="text" name="d_bs" title="d_bs" value={% if d_bs is defined %}{{ d_bs }}{% else %}"0"{% endif %} />
-        </td>
-      </tr>
+        <tr>
+            <td>Battleships</td>
+            <td>
+                <input type="text" name="a_bs" title="a_bs" {% if a_bs != 0 %}value="{{ a_bs }}"{% else %} placeholder="0"{% endif %}/>
+            </td>
+            <td>
+                <input type="text" name="d_bs" title="d_bs" {% if d_bs != 0 %}value="{{ d_bs }}"{% else %} placeholder="0"{% endif %}/>
+            </td>
+        </tr>
 
-      <tr>
-        <td>Aircraft Carriers</td>
-        <td>
-            <input type="text" name="a_ac" title="a_ac" value={% if a_ac is defined %}{{ a_ac }}{% else %}"0"{% endif %} />
-        </td>
-        <td>
-            <input type="text" name="d_ac" title="d_ac" value={% if d_ac is defined %}{{ d_ac }}{% else %}"0"{% endif %} />
-        </td>
-      </tr>
+        <tr>
+            <td>Aircraft Carriers</td>
+            <td>
+                <input type="text" name="a_ac" title="a_ac" {% if a_ac != 0 %}value="{{ a_ac }}"{% else %} placeholder="0"{% endif %}/>
+            </td>
+            <td>
+                <input type="text" name="d_ac" title="d_ac" {% if d_ac != 0 %}value="{{ d_ac }}"{% else %} placeholder="0"{% endif %}/>
+            </td>
+        </tr>
 
-      <tr>
-        <td>Cruisers</td>
-        <td>
-            <input type="text" name="a_c" title="a_c" value={% if a_c is defined %}{{ a_c }}{% else %}"0"{% endif %} />
-        </td>
-        <td>
-            <input type="text" name="d_c" title="d_c" value={% if d_c is defined %}{{ d_c }}{% else %}"0"{% endif %} />
-        </td>
-      </tr>
+        <tr>
+            <td>Cruisers</td>
+            <td>
+                <input type="text" name="a_c" title="a_c" {% if a_c != 0 %}value="{{ a_c }}"{% else %} placeholder="0"{% endif %}/>
+            </td>
+            <td>
+                <input type="text" name="d_c" title="d_c" {% if d_c != 0 %}value="{{ d_c }}"{% else %} placeholder="0"{% endif %}/>
+            </td>
+        </tr>
 
-      <tr>
-        <td>Destroyers</td>
-        <td>
-            <input type="text" name="a_d" title="a_d" value={% if a_d is defined %}{{ a_d }}{% else %}"0"{% endif %} />
-        </td>
-        <td>
-            <input type="text" name="d_d" title="d_d" value={% if d_d is defined %}{{ d_d }}{% else %}"0"{% endif %} />
-        </td>
-      </tr>
+        <tr>
+            <td>Destroyers</td>
+            <td>
+                <input type="text" name="a_d" title="a_d" {% if a_d != 0 %}value="{{ a_d }}"{% else %} placeholder="0"{% endif %}/>
+            </td>
+            <td>
+                <input type="text" name="d_d" title="d_d" {% if d_d != 0 %}value="{{ d_d }}"{% else %} placeholder="0"{% endif %}/>
+            </td>
+        </tr>
 
-      <tr>
-        <td>Submarines</td>
-        <td>
-            <input type="text" name="a_sub" title="a_sub" value={% if a_sub is defined %}{{ a_sub }}{% else %}"0"{% endif %} />
-        </td>
-        <td>
-            <input type="text" name="d_sub" title="d_sub" value={% if d_sub is defined %}{{ d_sub }}{% else %}"0"{% endif %} />
-        </td>
-      </tr>
+        <tr>
+            <td>Submarines</td>
+            <td>
+                <input type="text" name="a_sub" title="a_sub" {% if a_sub != 0 %}value="{{ a_sub }}"{% else %} placeholder="0"{% endif %}/>
+            </td>
+            <td>
+                <input type="text" name="d_sub" title="d_sub" {% if d_sub != 0 %}value="{{ d_sub }}"{% else %} placeholder="0"{% endif %}/>
+            </td>
+        </tr>
 
-      <tr>
-        <td>Transports</td>
-        <td>
-            <input type="text" name="a_t" title="a_t" value={% if a_t is defined %}{{ a_t }}{% else %}"0"{% endif %} />
-        </td>
-        <td>
-            <input type="text" name="d_t" title="d_t" value={% if d_t is defined %}{{ d_t }}{% else %}"0"{% endif %} />
-        </td>
-      </tr>
+        <tr>
+            <td>Transports</td>
+            <td>
+                <input type="text" name="a_t" title="a_t" {% if a_t != 0 %}value="{{ a_t }}"{% else %} placeholder="0"{% endif %}/>
+            </td>
+            <td>
+                <input type="text" name="d_t" title="d_t" {% if d_t != 0 %}value="{{ d_t }}"{% else %} placeholder="0"{% endif %}/>
+            </td>
+        </tr>
 
     </table>
-<br>
-Number of simulations: <input name="num_sims" title="num_sims" value={% if num_sims is defined %}{{ num_sims }}{% else %}"1000"{% endif %} />
-<br>
-<input type="submit" value="Simulate" >
+    <br>
+    Number of simulations: <input name="num_sims" title="num_sims" {% if num_sims != 1000 %}value="{{ num_sims }}"{% else %} placeholder="1000"{% endif %}/>
+    <br>
+    <input type="submit" value="Simulate" name="submitted">
 </form>
 
 <br>
 RESULTS
 <br>
 {% if win is defined %}
-win percent: {{ win * 100 }}%
+    win percent: {{ win * 100 }}%
 {% endif %}
 {% if loss is defined %}
-<br>
-loss percent: {{ loss * 100 }}%
+    <br>
+    loss percent: {{ loss * 100 }}%
 {% endif %}
 {% if draw is defined %}
-<br>
-win percent: {{ draw * 100 }}%
+    <br>
+    draw percent: {{ draw * 100 }}%
+{% endif %}
+
+{% if survivors is defined %}
+    <br>
+    <br>
+    <table style="width:25%">
+        <tr>
+            <th align="center" colspan="2">Number of Survivors</th>
+        </tr>
+        <tr>
+            <td align="center" colspan="2">Positive (+) indicates attacker survivors
+                <br>Negative (-) indicates defender survivors</td>
+        </tr>
+        <tr>
+            <td># of survivors</td>
+            <td>Likelihood (%)</td>
+        </tr>
+        {% for s in survivors %}
+            <tr>
+                <td>{{ s[0] }}</td>
+                <td>{{ s[1] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endif %}
 
 </html>
