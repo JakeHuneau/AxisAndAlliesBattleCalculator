@@ -127,4 +127,4 @@ def battle_sim(attackers, defenders, num_sims=1000):
     return {'win': wins/num_sims,
             'loss': losses/num_sims,
             'draw': draws/num_sims,
-            'survivors': sorted((k, v/num_sims) for k, v in survivors.items())}
+            'survivors': sorted((k, 100 * v/num_sims) for k, v in survivors.items())}
